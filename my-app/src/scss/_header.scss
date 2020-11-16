@@ -1,0 +1,47 @@
+.header {
+  height: 100px;
+  border: 1px solid $color-accent ;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .logo {
+    height: 75px;
+  }
+
+  .img_circle {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    border: 3px solid $color-primary;
+    margin-right: 10px;
+    overflow: hidden;
+    position: relative;
+    img {
+      width: 76px;
+      height: 76px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+  }
+
+  .avatar_box {
+    display: flex;
+    align-items: center;
+  }
+  .avatar_name {
+    font-family: 'Niramit', sans-serif;
+    font-weight: bold;
+    font-size: 35px;
+    margin-right: 20px;
+  }
+
+  .header_box {
+    display: flex;
+    justify-content: space-between;
+  }
+
+}

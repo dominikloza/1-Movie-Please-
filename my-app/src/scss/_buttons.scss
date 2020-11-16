@@ -1,0 +1,51 @@
+.btn {
+  width: 188px;
+  height: 48px;
+  border: 1px solid $color-primary;
+  border-radius: 17px;
+  font-family: "Niramit", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.8s;
+  overflow: hidden;
+  color: #fff;
+  background: none;
+  position: relative;
+  &:hover {
+  color: $color-primary;
+}
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 0 0 50% 50%;
+    width: 100%;
+    height: 180%;
+    background-color: $color-primary;
+    z-index: -1;
+    transition: 0.5s;
+  }
+  &:hover::before {
+    height: 0;
+  }
+
+}
+
+.btn_box {
+  margin: 20px auto 0 auto;
+  position: relative;
+  width: 188px;
+  height: 48px;
+}
+
+.btn-primary {
+  color: #fff;
+  width: 380px;
+  transform: translateX(-25%);
+}
+.btn-primary-small {
+  color: #fff;
+}

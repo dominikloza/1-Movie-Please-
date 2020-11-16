@@ -1,0 +1,75 @@
+.main_page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  .page_title {
+    text-align: center;
+    font-family: 'Niramit', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 120px;
+  }
+
+  .btn_box {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .page_text {
+    color: $color-primary;
+    font-family: 'Niramit', sans-serif;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+}
+
+.aside_nav {
+  width: 1450px;
+  height: 1450px;
+  border-radius: 50%;
+  position: absolute;
+  right: -1350px;
+  top: -250px;
+  background: rgb(203, 48, 102);
+  background: linear-gradient(132deg, rgba(203, 48, 102, 1) 0%, rgba(22, 191, 253, 1) 100%);
+  transition: 0.5s;
+  z-index: 2;
+}
+
+.fa-arrow-circle-left {
+  transition: 0.5s;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  font-size: 45px;
+  color: #fff;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 500px;
+  position: absolute;
+  top: 45%;
+  right: -500px;
+  z-index: 3;
+  transform: translateY(-50%);
+
+  .nav_link {
+    text-decoration: none;
+    font-family: 'Niramit', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    color: #fff;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
