@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/analytics";
 import "firebase/firestore";
+import "firebase/auth"
 const firebaseConfig = {
     apiKey: "AIzaSyDThjQPB6xjAwcsc4YyMasDyIi0rlM-wC0",
     authDomain: "one-movie-please.firebaseapp.com",
@@ -12,6 +13,14 @@ const firebaseConfig = {
     measurementId: "G-6WQHHJVZ73"
 };
 const fire = firebase.initializeApp(firebaseConfig);
-firebase.auth();
-firebase.analytics();
+const db = firebase.firestore();
+const googleProvider = new firebase.auth.GoogleAuthProvider()
+export const signInWithGoogle = () => {
+    firebase.signInWithPopup(googleProvider).then((res) => {
+        console.log(res.user)
+    }).catch((error) => {
+        console.log(error.message)
+    })
+}
+export {db};
 export default fire;

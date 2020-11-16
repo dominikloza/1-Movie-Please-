@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Button from "../Button";
 import Header from "./Header";
 
-const Preferences = ({name}) => {
+const Preferences = () => {
 
     const [action, setAction] = useState(false);
     const [comedy, setComedy] = useState(false);
@@ -34,7 +34,7 @@ const Preferences = ({name}) => {
             <Header/>
             <div className="container">
                 <div className="preferences_box">
-                    <h1>Hello, {name}</h1>
+                    <h1>Hello, </h1>
                     <h3>Tell Us more About You</h3>
                     <h2>Which movie's categories do you prefer?</h2>
                     <div className="category_box">

@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import Button from "../Button";
-import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
-
+import { useHistory } from "react-router-dom";
 
 const style = {
     fontFamily: "Niramit",
@@ -57,7 +56,7 @@ const FormRegister = ({setName, title}) => {
         },
     });
 
-
+    let history = useHistory();
 
     return (
         <div className="container">
@@ -120,7 +119,7 @@ const FormRegister = ({setName, title}) => {
                     {formik.touched.passwordRepeat && formik.errors.passwordRepeat ? (
                         <div style={style}>{formik.errors.passwordRepeat}</div>
                     ) : null}
-                   <Button btnType="btn btn-primary-small" text="Done"/>
+                   <Button btnType="btn btn-primary-small" onClick={history.push("/preferences")} text="Done"/>
                 </form>
             </div>
         </div>

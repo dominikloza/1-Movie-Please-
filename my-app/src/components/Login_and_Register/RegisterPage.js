@@ -2,11 +2,14 @@ import React from 'react';
 import Header from "./Header";
 import FormRegister from "./FromRegister";
 
-const RegisterPage = ({setName}) => {
+
+const RegisterPage = () => {
+
+
     return (
         <div className="page">
             <Header/>
-            <FormRegister setName={setName} title="Register"/>
+            <FormRegister title="Register"/>
         </div>
     );
 };

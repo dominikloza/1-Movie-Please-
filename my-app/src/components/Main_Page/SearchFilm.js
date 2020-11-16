@@ -8,7 +8,6 @@ import fire, {db} from "../../firebase";
 const MainView = ({logged, name}) => {
 
 
-
     let styleCircle = {}
     let styleArrow = {}
     let styleNav = {}
@@ -56,8 +55,8 @@ const MainView = ({logged, name}) => {
 
 
     const logout = () => {
-        fire.auth().signOut().then(function() {
-        }).catch(function(error) {
+        fire.auth().signOut().then(function () {
+        }).catch(function (error) {
             console.log(error)
         });
     }
@@ -65,9 +64,22 @@ const MainView = ({logged, name}) => {
     return (
         <div className="main_page">
             <Header style={avatarStyle} logged={logged} name={name}/>
-            <h1 className="page_title">Hello , {name}</h1>
-            <h2 className="page_text">What are You Going to Watch Today ?</h2>
-            <Link to="/searchFilm"><Button btnType="btn btn-primary-small" text="Find it out"/></Link>
+            <h2 className="page_text search_film">Let's choose
+                Preferences of a Movie and Click on Button below</h2>
+            <Button btnType="btn btn-primary-small" text="Find it out"/>
+            <div className="film_box">
+                <img src="" alt=""/>
+                <div className="text_box">
+                    <h2>Title</h2>
+                    <p className="film_descr">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid
+                        corporis, dignissimos dolor doloribus earum eos esse fugit in natus obcaecati officia omnis
+                        quaerat quas quibusdam, repellat repudiandae sit voluptate!</p>
+                    <div className="rate_scale">
+                        <span className="rate_prec">72%</span> people recommendation
+                    </div>
+                    <button>Read More</button>
+                </div>
+            </div>
             <i className="fas fa-arrow-circle-left" style={styleArrow}
                onMouseEnter={aside === "clicked" ? undefined : () => setAside(true)}
                onClick={aside === "clicked" ? () => setAside(undefined) : () => setAside("clicked")}></i>
