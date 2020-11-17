@@ -9,7 +9,7 @@
   img {
     width: 270px;
     height: 400px;
-    border-radius: 22px;
+    border-radius: 10px;
   }
   .text_box {
     padding: 20px;
@@ -18,8 +18,33 @@
     color: #000;
     h2 {
       font-size: 35px;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
     }
+    .original_title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: lighter;
+      margin-right: 5px;
+    }
+    .categories {
+      margin-bottom: 15px;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      .category {
+        color: $color-primary;
+        font-family: 'Niramit', sans-serif;
+        border: 2px solid $color-primary;
+        border-radius: 22px;
+        padding: 3px 10px;
+        font-size: 18px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+      }
+    }
+
     p {
       font-size: 18px;
       line-height: 1.3rem;
@@ -51,6 +76,7 @@
       letter-spacing: 1px;
       bottom: 15px;
       right: 20px;
+
     }
 
   }

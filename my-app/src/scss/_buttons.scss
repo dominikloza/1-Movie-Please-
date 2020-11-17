@@ -47,5 +47,8 @@
   transform: translateX(-25%);
 }
 .btn-primary-small {
+  &:focus {
+    outline: none;
+  }
   color: #fff;
 }
