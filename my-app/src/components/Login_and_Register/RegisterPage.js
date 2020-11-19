@@ -3,13 +3,13 @@ import Header from "./Header";
 import FormRegister from "./FromRegister";
 
 
-const RegisterPage = () => {
+const RegisterPage = ({setRegisterData}) => {
 
 
     return (
         <div className="page">
             <Header/>
-            <FormRegister title="Register"/>
+            <FormRegister title="Register" setRegisterData={setRegisterData}/>
         </div>
     );
 };

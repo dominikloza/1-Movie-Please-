@@ -5,7 +5,7 @@ import Button from "../Button";
 import {Link} from "react-router-dom";
 import fire, {db} from "../../firebase";
 
-const MainView = ({logged, name}) => {
+const MainView = ({logged, userData}) => {
 
 
 
@@ -64,8 +64,8 @@ const MainView = ({logged, name}) => {
 
     return (
         <div className="main_page">
-            <Header style={avatarStyle} logged={logged} name={name}/>
-            <h1 className="page_title">Hello , {name}</h1>
+            <Header style={avatarStyle} logged={logged} userData={userData}/>
+            <h1 className="page_title">Hello , {userData.name}</h1>
             <h2 className="page_text">What are You Going to Watch Today ?</h2>
             <Link to="/searchFilm"><Button btnType="btn btn-primary-small" text="Find it out"/></Link>
             <i className="fas fa-arrow-circle-left" style={styleArrow}
@@ -73,7 +73,7 @@ const MainView = ({logged, name}) => {
                onClick={aside === "clicked" ? () => setAside(undefined) : () => setAside("clicked")}></i>
             <nav style={styleNav}>
                 <Link className="nav_link">Account</Link>
-                <Link className="nav_link">History</Link>
+                <Link to="/preferences" className="nav_link">Preferences</Link>
                 <Link className="nav_link">Friends</Link>
                 <button className="nav_link" onClick={logout}>Sign Out</button>
             </nav>

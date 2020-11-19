@@ -2,12 +2,13 @@ import React, {useEffect, useState} from 'react';
 import Header from "../Login_and_Register/Header";
 import Footer from "./Footer";
 import Button from "../Button";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import fire, {db} from "../../firebase";
 import {API_KEY, API_URL} from "../../APIconfing";
 import poster from '../../resources/poster.png'
+import userEvent from "@testing-library/user-event";
 
-const MainView = ({logged, name}) => {
+const SearchFilm = ({logged, userData, movie, setMovie}) => {
 
 
         let styleCircle = {}
@@ -55,9 +56,11 @@ const MainView = ({logged, name}) => {
             styleArrow = undefined;
         }
 
+        let history = useHistory();
 
         const logout = () => {
             fire.auth().signOut().then(function () {
+                history.push("/")
             }).catch(function (error) {
                 console.log(error)
             });
@@ -70,12 +73,10 @@ const MainView = ({logged, name}) => {
         let numPageMovies;
         let movieID;
         let lengthPage;
-        const [movie, setMovie] = useState(false);
         let isSearched;
         let category;
         let page;
         let filmNum;
-        let maxText;
 
         const handleSearch = () => {
             fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=bbef4d3837dce662da7cd81c33cc86ea&language=en-US`, {
@@ -90,10 +91,13 @@ const MainView = ({logged, name}) => {
                 })
                 .then(data => {
                     movieCat = data;
-                    category = Math.floor(Math.random() * movieCat.genres.length);
-                    catNum = movieCat.genres[category].id;
+                    let tempArr = movieCat.genres.filter(el => userData.preferences.includes(el.name))
+                    console.log(tempArr)
+                    category = Math.floor(Math.random() * tempArr.length);
+                    console.log(category)
+                    catNum = tempArr[category].id;
 
-                    return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=bbef4d3837dce662da7cd81c33cc86ea&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${catNum}`, {
+                    return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=bbef4d3837dce662da7cd81c33cc86ea&language=pl-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${catNum}`, {
                         method: 'GET'
                     })
                 })
@@ -109,7 +113,7 @@ const MainView = ({logged, name}) => {
                     numPages = listMovies.total_pages;
                     page = Math.floor(Math.random() * (numPages)) + 1;
 
-                    return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=bbef4d3837dce662da7cd81c33cc86ea&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${catNum}`, {
+                    return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=bbef4d3837dce662da7cd81c33cc86ea&language=pl-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${catNum}`, {
                         method: 'GET'
                     })
                 })
@@ -140,11 +144,6 @@ const MainView = ({logged, name}) => {
                 .then(data => {
                     setMovie(data);
                     isSearched = true;
-                    if(isSearched) {
-                        if ((movie.title.length > 25 || movie.genres.length > 4) || (movie.title.length > 25 && movie.genres.length > 4 )) {
-                            maxText = 100;
-                        }
-                    }
                 })
                 .catch(err => console.log(err));
         };
@@ -153,11 +152,11 @@ const MainView = ({logged, name}) => {
 
         return (
             <div className="main_page">
-                <Header style={avatarStyle} logged={logged} name={name}/>
+                <Header style={avatarStyle} logged={logged} userData={userData}/>
                 <h2 className="page_text search_film">Let's choose
                     Preferences of a Movie and Click on Button below</h2>
                 <div className="btn_box">
-                    <button onClick={handleSearch} type="submit" className="btn btn-primary-small">Find it out</button>
+                    <button onClick={handleSearch} type="submit" className="btn btn-primary-small">Find a Movie</button>
                 </div>
                 {movie &&
                 <div className="film_box">
@@ -175,11 +174,11 @@ const MainView = ({logged, name}) => {
                             }
                         </div>
                         <p className="film_descr">
-                            {movie.overview.length <= maxText ? movie.overview.slice(0, 300) : movie.overview.slice(0, maxText) + "..."}
+                            {movie.title.length > 35 ? movie.overview.slice(0, 150) + "..." : movie.overview.slice(0, 200) + "..."}
                         </p>
                         <div className="rate_scale">
                         </div>
-                        <button>Read More</button>
+                        <Link to="/fullFilmDescription"><button>Read More</button></Link>
                     </div>
                 </div>
                 }
@@ -188,7 +187,7 @@ const MainView = ({logged, name}) => {
                    onClick={aside === "clicked" ? () => setAside(undefined) : () => setAside("clicked")}></i>
                 <nav style={styleNav}>
                     <Link className="nav_link">Account</Link>
-                    <Link className="nav_link">History</Link>
+                    <Link to="/preferences" className="nav_link">Preferences</Link>
                     <Link className="nav_link">Friends</Link>
                     <button className="nav_link" onClick={logout}>Sign Out</button>
                 </nav>
@@ -200,4 +199,4 @@ const MainView = ({logged, name}) => {
     }
 ;
 
-export default MainView;
+export default SearchFilm;

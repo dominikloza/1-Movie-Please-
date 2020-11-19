@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from "../Button";
 import {useFormik} from 'formik';
 import { useHistory } from "react-router-dom";
@@ -40,7 +40,9 @@ const validate = values => {
     return errors;
 };
 
-const FormRegister = ({setName, title}) => {
+const FormRegister = ({title, setRegisterData}) => {
+
+    let history = useHistory();
 
     const formik = useFormik({
         initialValues: {
@@ -50,13 +52,17 @@ const FormRegister = ({setName, title}) => {
             email: '',
         },
         validate,
-        onSubmit: values => {
-            setName(formik.values.fullName);
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: () => {
+            setRegisterData({
+                fullName: formik.values.fullName,
+                password: formik.values.password,
+                email: formik.values.email
+            })
+            history.push("/preferences");
         },
     });
 
-    let history = useHistory();
+
 
     return (
         <div className="container">
@@ -119,7 +125,7 @@ const FormRegister = ({setName, title}) => {
                     {formik.touched.passwordRepeat && formik.errors.passwordRepeat ? (
                         <div style={style}>{formik.errors.passwordRepeat}</div>
                     ) : null}
-                   <Button btnType="btn btn-primary-small" onClick={history.push("/preferences")} text="Done"/>
+                   <Button btnType="btn btn-primary-small" text="Done"/>
                 </form>
             </div>
         </div>

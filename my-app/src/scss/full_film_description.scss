@@ -1,0 +1,65 @@
+.film_box.full {
+  width: 1200px;
+  height: 70%;
+  margin: unset;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  padding: 30px 30px;
+  background: rgb(203, 48, 102);
+  background: linear-gradient(132deg, rgba(203, 48, 102, 1) 0%, rgba(22, 191, 253, 1) 100%);
+  color: #fff;
+  .text_box {
+    color: #fff;
+    width: 65%;
+
+    .category {
+      background: $color-primary;
+      color: #fff;
+    }
+
+    h2 {
+      font-weight: bold;
+    }
+
+    .original_title {
+    margin-bottom: 10px;
+    }
+    button {
+      bottom: 40px;
+      right: 40px;
+    }
+
+    .movie_duration {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .imdb_rate {
+      font-weight: bold;
+      margin: 10px 0 20px 0;
+      display: flex;
+      align-items: center;
+      background: black;
+      border-radius: 10px;
+      padding: 10px 10px;
+      width: 140px;
+      color: #fff;
+      .fa-imdb {
+        font-size: 50px;
+        color: #f3ce13;
+        margin-right: 5px;
+      }
+    }
+
+    .descr_title {
+    font-weight: bold;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+
+  }
+}

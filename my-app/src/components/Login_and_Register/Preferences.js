@@ -1,27 +1,167 @@
-import React, {useState} from 'react';
-import Button from "../Button";
+import React, {useEffect, useState} from 'react';
 import Header from "./Header";
+import fire, {db} from "../../firebase";
+import {useHistory} from "react-router-dom";
 
-const Preferences = () => {
+const Preferences = ({registerData, user, userData}) => {
 
-    const [action, setAction] = useState(false);
-    const [comedy, setComedy] = useState(false);
-    const [adventure, setAdventure] = useState(false);
-    const [animation, setAnimation] = useState(false);
-    const [horror, setHorror] = useState(false);
-    const [crime, setCrime] = useState(false);
-    const [doc, setDoc] = useState(false);
-    const [family, setFamily] = useState(false);
-    const [fantasy, setFantasy] = useState(false);
-    const [history, setHistory] = useState(false);
-    const [music, setMusic] = useState(false);
-    const [romance, setRomance] = useState(false);
-    const [mystery, setMystery] = useState(false);
-    const [sciFi, setSciFi] = useState(false);
-    const [tvMovie, setTvMovie] = useState(false);
-    const [thriller, setThriller] = useState(false);
-    const [war, setWar] = useState(false);
-    const [western, setWestern] = useState(false);
+
+    const [pref, setPref] = useState([
+        {
+            name: "Action",
+            isClicked: false
+        },
+        {
+            name: "Comedy",
+            isClicked: false
+        },
+        {
+            name: "Adventure",
+            isClicked: false
+        },
+        {
+            name: "Animation",
+            isClicked: false
+        },
+        {
+            name: "Horror",
+            isClicked: false
+        },
+        {
+            name: "Crime",
+            isClicked: false
+        },
+        {
+            name: "Documentary",
+            isClicked: false
+        },
+        {
+            name: "Family",
+            isClicked: false
+        },
+        {
+            name: "Fantasy",
+            isClicked: false
+        },
+        {
+            name: "History",
+            isClicked: false
+        },
+        {
+            name: "Music",
+            isClicked: false
+        },
+        {
+            name: "Romance",
+            isClicked: false
+        },
+        {
+            name: "Mystery",
+            isClicked: false
+        },
+        {
+            name: "Science Fiction",
+            isClicked: false
+        },
+        {
+            name: "TV Movie",
+            isClicked: false
+        },
+        {
+            name: "Thriller",
+            isClicked: false
+        },
+        {
+            name: "War",
+            isClicked: false
+        },
+        {
+            name: "Western",
+            isClicked: false
+        }
+    ])
+
+    const [userPref, setUserPref] = useState({});
+    useEffect(() => {
+        if (user) {
+            let docRef = db.collection("users").doc(user.email);
+            docRef.get()
+                .then(function (doc) {
+                        if (doc.exists) {
+                            setUserPref(doc.data().preferences);
+                        } else {
+                            console.log("No such document!");
+                        }
+            })
+            // let items = [...pref];
+            // userPref.forEach((el) => {
+            //     items.map(item => {
+            //         if(item.name === el) {
+            //             item.isClicked = true;
+            //         }
+            //     })
+            // })
+            // setPref([...items]);
+
+        }
+    }, [])
+
+    const handleClick = (index) => {
+        let items = [...pref];
+        let item = {...items[index]};
+        item.isClicked = !item.isClicked;
+        items[index] = item;
+        setPref([...items]);
+    }
+
+    const [userName, setUserName] = useState("");
+    let history = useHistory();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let tempArr = [...pref];
+        let newArr = tempArr.filter((el) => el.isClicked === true)
+        let arr = [];
+        newArr.forEach((el) => {
+            arr.push(el.name);
+        })
+        console.log(newArr);
+        console.log(arr);
+
+        if (newArr.length !== 0) {
+            if (user === {}) {
+                fire.auth().createUserWithEmailAndPassword(registerData.email, registerData.password).then((u) => {
+                }).then(() => {
+                    console.log("Zarejestrowano")
+                })
+            }
+            if (user) {
+                db.collection("users").doc(user.email).set({
+                    name: userData.name,
+                    preferences: [...arr]
+                })
+                    .then(function () {
+                        history.push("/")
+                        console.log("Document successfully written!");
+                    })
+                    .catch(function (error) {
+                        console.error("Error writing document: ", error);
+                    })
+            } else {
+                db.collection("users").doc(registerData.email).set({
+                    name: registerData.fullName,
+                    preferences: [...arr]
+                })
+                    .then(function () {
+                        history.push("/")
+                        console.log("Document successfully written!");
+                    })
+                    .catch(function (error) {
+                        console.error("Error writing document: ", error);
+                    })
+            }
+        }
+    }
 
     const styleTrue = {
         backgroundColor: "#16BFFD",
@@ -34,77 +174,23 @@ const Preferences = () => {
             <Header/>
             <div className="container">
                 <div className="preferences_box">
-                    <h1>Hello, </h1>
+                    <h1>Hello</h1>
                     <h3>Tell Us more About You</h3>
                     <h2>Which movie's categories do you prefer?</h2>
                     <div className="category_box">
-                        <div className="category" onClick={e => setAction(prevState => !prevState)}
-                             style={action ? styleTrue : undefined}>Action
-                        </div>
-                        <div className="category" onClick={e => setComedy(prevState => !prevState)}
-                             style={comedy ? styleTrue : undefined}>Comedy
-                        </div>
-                        <div className="category" onClick={e => setAdventure(prevState => !prevState)}
-                             style={adventure ? styleTrue : undefined}>Adventure
-                        </div>
-                    </div>
-                    <div className="category_box">
-                        <div className="category" onClick={e => setAnimation(prevState => !prevState)}
-                             style={animation ? styleTrue : undefined}>Animation
-                        </div>
-                        <div className="category" onClick={e => setHorror(prevState => !prevState)}
-                             style={horror ? styleTrue : undefined}>Horror
-                        </div>
-                        <div className="category" onClick={e => setCrime(prevState => !prevState)}
-                             style={crime ? styleTrue : undefined}>Crime
-                        </div>
-                    </div>
-                    <div className="category_box">
-                        <div className="category" onClick={e => setDoc(prevState => !prevState)}
-                             style={doc ? styleTrue : undefined}>Documentary
-                        </div>
-                        <div className="category" onClick={e => setFamily(prevState => !prevState)}
-                             style={family ? styleTrue : undefined}>Family
-                        </div>
-                        <div className="category" onClick={e => setFantasy(prevState => !prevState)}
-                             style={fantasy ? styleTrue : undefined}>Fantasy
-                        </div>
-                    </div>
-                    <div className="category_box">
-                        <div className="category" onClick={e => setHistory(prevState => !prevState)}
-                             style={history ? styleTrue : undefined}>History
-                        </div>
-                        <div className="category" onClick={e => setMusic(prevState => !prevState)}
-                             style={music ? styleTrue : undefined}>Music
-                        </div>
-                        <div className="category" onClick={e => setRomance(prevState => !prevState)}
-                             style={romance ? styleTrue : undefined}>Romance
-                        </div>
-                    </div>
-                    <div className="category_box">
-                        <div className="category" onClick={e => setMystery(prevState => !prevState)}
-                             style={mystery ? styleTrue : undefined}>Mystery
-                        </div>
-                        <div className="category" onClick={e => setSciFi(prevState => !prevState)}
-                             style={sciFi ? styleTrue : undefined}>Sci-Fi
-                        </div>
-                        <div className="category" onClick={e => setTvMovie(prevState => !prevState)}
-                             style={tvMovie ? styleTrue : undefined}>TV Movie
-                        </div>
-                    </div>
-                    <div className="category_box">
-                        <div className="category" onClick={e => setThriller(prevState => !prevState)}
-                             style={thriller ? styleTrue : undefined}>Thriller
-                        </div>
-                        <div className="category" onClick={e => setWar(prevState => !prevState)}
-                             style={war ? styleTrue : undefined}>War
-                        </div>
-                        <div className="category" onClick={e => setWestern(prevState => !prevState)}
-                             style={western ? styleTrue : undefined}>Western
-                        </div>
+                        {
+                            pref.map((el, index) => {
+                                return (
+                                    <div className="category" onClick={() => handleClick(index)}
+                                         style={pref[index].isClicked ? styleTrue : undefined}>{el.name}</div>
+                                )
+                            })
+                        }
                     </div>
                     <form>
-                        <Button btnType="btn btn-primary-small" text="Done"/>
+                        <div className="btn_box">
+                            <button type="submit" onClick={handleSubmit} className="btn-primary-small btn">Done</button>
+                        </div>
                     </form>
                 </div>
             </div>

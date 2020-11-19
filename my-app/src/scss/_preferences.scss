@@ -27,8 +27,9 @@
 
   .category_box {
     display: flex;
-    justify-content: space-evenly;
-    width: 375px;
+    flex-wrap: wrap;
+    width: 500px;
+    justify-content: center;
     .category {
       color: $color-secondary;
       border: 1px solid $color-secondary;

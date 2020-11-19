@@ -5,12 +5,12 @@ import {Link} from 'react-router-dom';
 import fire, {signInWithGoogle} from "../../firebase";
 import MainView from "../Main_Page/MainView";
 
-const LoginPage = ({user, name, logged}) => {
+const LoginPage = ({user, userData, logged}) => {
 
 
     return (
         <>
-        { user ? (<MainView logged={logged} name={name}/>) : (
+        { user ? (<MainView logged={logged} userData={userData}/>) : (
         <div className="page">
             <Header/>
             <FormLogin title="Member Login"/>
