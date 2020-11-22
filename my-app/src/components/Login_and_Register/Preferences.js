@@ -81,30 +81,6 @@ const Preferences = ({registerData, user, userData}) => {
         }
     ])
 
-    const [userPref, setUserPref] = useState({});
-    useEffect(() => {
-        if (user) {
-            let docRef = db.collection("users").doc(user.email);
-            docRef.get()
-                .then(function (doc) {
-                        if (doc.exists) {
-                            setUserPref(doc.data().preferences);
-                        } else {
-                            console.log("No such document!");
-                        }
-            })
-            // let items = [...pref];
-            // userPref.forEach((el) => {
-            //     items.map(item => {
-            //         if(item.name === el) {
-            //             item.isClicked = true;
-            //         }
-            //     })
-            // })
-            // setPref([...items]);
-
-        }
-    }, [])
 
     const handleClick = (index) => {
         let items = [...pref];
@@ -129,7 +105,7 @@ const Preferences = ({registerData, user, userData}) => {
         console.log(arr);
 
         if (newArr.length !== 0) {
-            if (user === {}) {
+            if (user === null) {
                 fire.auth().createUserWithEmailAndPassword(registerData.email, registerData.password).then((u) => {
                 }).then(() => {
                     console.log("Zarejestrowano")

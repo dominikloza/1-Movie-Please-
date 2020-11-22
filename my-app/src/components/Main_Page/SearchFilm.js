@@ -8,7 +8,7 @@ import {API_KEY, API_URL} from "../../APIconfing";
 import poster from '../../resources/poster.png'
 import userEvent from "@testing-library/user-event";
 
-const SearchFilm = ({logged, userData, movie, setMovie}) => {
+const SearchFilm = ({logged, userData, movie, setMovie, setDarkMode}) => {
 
 
         let styleCircle = {}
@@ -163,7 +163,7 @@ const SearchFilm = ({logged, userData, movie, setMovie}) => {
                     <img src={movie.poster_path === null ? poster :`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt=""/>
                     <div className="text_box">
                         <h2>{movie.title}</h2>
-                        <h3><span className="original_title">({movie.original_title})</span>({movie.release_date.slice(0,4)})</h3>
+                        <h3 className="under_title"><span className="original_title">({movie.original_title})</span>({movie.release_date.slice(0,4)})</h3>
                         <div className="categories">
                             {
                                 movie.genres.map((el) => {
@@ -193,7 +193,7 @@ const SearchFilm = ({logged, userData, movie, setMovie}) => {
                 </nav>
                 <div className="aside_nav" style={styleCircle}
                      onMouseLeave={aside === "clicked" ? undefined : () => setAside(false)}></div>
-                <Footer/>
+                <Footer setDarkMode={setDarkMode}/>
             </div>
         );
     }

@@ -43,8 +43,14 @@
 
 .btn-primary {
   color: #fff;
+  background: none;
   width: 380px;
   transform: translateX(-25%);
+
+  &:hover {
+    background: none;
+    border-color: $color-primary;
+  }
 }
 .btn-primary-small {
   &:focus {

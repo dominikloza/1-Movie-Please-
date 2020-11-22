@@ -18,6 +18,7 @@ import FullFilmDescription from "./components/Main_Page/FilmFullDescription";
 function App() {
 
     const [logged, setLogged] =useState(false);
+    const [darkMode, setDarkMode] = useState(false);
     const [user,setUser] = useState({});
     const [userData, setUserData] = useState({});
     const [movie, setMovie] = useState(null);
@@ -64,7 +65,7 @@ function App() {
     return (
         <HashRouter>
             <Switch>
-                <Route exact path='/' render={() => <LoginPage user={user} userData={userData} logged={logged}/>}/>
+                <Route exact path='/' render={() => <LoginPage user={user} userData={userData} logged={logged} /> }/>
                 <Route path='/register' render={() => <RegisterPage setRegisterData={setRegisterData}/>}/>
                 <Route path='/preferences' render={() => <Preferences registerData={registerData} user={user} userData={userData}/>}/>
                 <Route path='/searchFilm' render={() => <SearchFilm logged={logged} userData={userData} movie={movie} setMovie={setMovie}/>}/>

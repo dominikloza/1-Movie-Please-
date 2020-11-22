@@ -1,4 +1,7 @@
-
+body {
+  background: #323232;
+  color: #fff;
+}
 .main_page {
   width: 100vw;
   height: 100vh;
@@ -22,7 +25,7 @@
   }
 
   .page_text {
-    color: $color-primary;
+    color: #fff;
     font-family: 'Niramit', sans-serif;
     font-size: 30px;
     text-align: center;

@@ -8,7 +8,7 @@ import {API_KEY, API_URL} from "../../APIconfing";
 import poster from '../../resources/poster.png'
 import userEvent from "@testing-library/user-event";
 
-const FullFilmDescription = ({logged, userData, movie}) => {
+const FullFilmDescription = ({logged, userData, movie, setDarkMode}) => {
 
 
         let styleCircle = {}
@@ -144,7 +144,7 @@ const FullFilmDescription = ({logged, userData, movie}) => {
                 </nav>
                 <div className="aside_nav" style={styleCircle}
                      onMouseLeave={aside === "clicked" ? undefined : () => setAside(false)}></div>
-                <Footer/>
+                <Footer setDarkMode={setDarkMode}/>
             </div>
         );
     }

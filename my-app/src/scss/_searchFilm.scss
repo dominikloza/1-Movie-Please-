@@ -6,25 +6,35 @@
   border-radius: 22px;
   position: relative;
   display: flex;
+  background: #212121;
+
   img {
     width: 270px;
-    height: 400px;
+    height: 380px;
     border-radius: 10px;
   }
+
   .text_box {
     padding: 20px;
-   width: 55%;
+    width: 55%;
     font-family: 'Niramit', sans-serif;
+
     h2 {
-      font-size: 35px;
+      font-size: 30px;
       margin-bottom: 8px;
     }
+
     .original_title {
       font-size: 20px;
       margin-bottom: 20px;
       font-weight: lighter;
       margin-right: 5px;
     }
+
+    .under_title {
+      font-size: 1rem;
+    }
+
     .categories {
       margin-bottom: 15px;
       margin-top: 15px;
@@ -32,13 +42,14 @@
       align-items: center;
       justify-content: flex-start;
       flex-wrap: wrap;
+
       .category {
         background: $color-primary;
         font-family: 'Niramit', sans-serif;
         border: 2px solid $color-primary;
         border-radius: 22px;
         padding: 3px 10px;
-        font-size: 18px;
+        font-size: 14px;
         margin-left: 10px;
         margin-bottom: 10px;
       }
@@ -63,6 +74,7 @@
       font-weight: bold;
       font-size: 20px;
       text-align: center;
+
       .rate_prec {
         border-radius: 50%;
         padding: 5px;
@@ -72,7 +84,7 @@
 
     button {
       border: 0;
-      padding: 10px 30px;
+      padding: 5px 20px;
       font-family: 'Niramit', sans-serif;
       font-size: 20px;
       background: $color-primary;
