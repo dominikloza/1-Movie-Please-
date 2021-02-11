@@ -25,6 +25,9 @@ List of features
 * Links where you can watch movie
 * Cast of the film
 
+## Live
+* demo link: https://movieapp.d3ewzo9lfbh2vw.amplifyapp.com/#/
+
 
 ## Status
 Project is: _In_Progress_
