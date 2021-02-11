@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Header from "../Login_and_Register/Header";
 import Footer from "./Footer";
 import Button from "../Button";
 import {Link} from "react-router-dom";
-import fire, {db} from "../../firebase";
+import fire from "../../firebase";
 
-const MainView = ({logged, userData}) => {
+const MainView = ({logged, user}) => {
 
 
 
@@ -64,8 +64,8 @@ const MainView = ({logged, userData}) => {
 
     return (
         <div className="main_page">
-            <Header style={avatarStyle} logged={logged} userData={userData}/>
-            <h1 className="page_title">Hello , {userData.name}</h1>
+            <Header style={avatarStyle} logged={logged} user={user}/>
+            <h1 className="page_title">Hello , {user.email}</h1>
             <h2 className="page_text">What are You Going to Watch Today ?</h2>
             <Link to="/searchFilm"><Button btnType="btn btn-primary-small" text="Find it out"/></Link>
             <i className="fas fa-arrow-circle-left" style={styleArrow}

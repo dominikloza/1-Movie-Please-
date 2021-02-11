@@ -18,7 +18,6 @@ import FullFilmDescription from "./components/Main_Page/FilmFullDescription";
 function App() {
 
     const [logged, setLogged] =useState(false);
-    const [darkMode, setDarkMode] = useState(false);
     const [user,setUser] = useState({});
     const [userData, setUserData] = useState({});
     const [movie, setMovie] = useState(null);
@@ -27,7 +26,6 @@ function App() {
         password: "",
         email: ""
     });
-    let name;
 
 
 
@@ -37,6 +35,7 @@ function App() {
             if (user) {
                 setUser(user);
                 setLogged(true);
+                console.log(user.email);
                 let docRef = db.collection("users").doc(user.email);
                 docRef.get().then(function(doc) {
                     db.collection("users").doc(user.email)
@@ -65,11 +64,11 @@ function App() {
     return (
         <HashRouter>
             <Switch>
-                <Route exact path='/' render={() => <LoginPage user={user} userData={userData} logged={logged} /> }/>
+                <Route exact path='/' render={() => <LoginPage user={user} logged={logged} /> }/>
                 <Route path='/register' render={() => <RegisterPage setRegisterData={setRegisterData}/>}/>
                 <Route path='/preferences' render={() => <Preferences registerData={registerData} user={user} userData={userData}/>}/>
-                <Route path='/searchFilm' render={() => <SearchFilm logged={logged} userData={userData} movie={movie} setMovie={setMovie}/>}/>
-                <Route path='/fullFilmDescription' render={() => <FullFilmDescription logged={logged} userData={userData} movie={movie}/>}/>
+                <Route path='/searchFilm' render={() => <SearchFilm logged={logged} userData={userData} user={user} movie={movie} setMovie={setMovie}/>}/>
+                <Route path='/fullFilmDescription' render={() => <FullFilmDescription logged={logged} user={user} movie={movie}/>}/>
 
             </Switch>
         </HashRouter>

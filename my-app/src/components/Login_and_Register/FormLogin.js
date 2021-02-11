@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from "../Button";
 import {useFormik} from 'formik';
 import fire from "../../firebase";
@@ -34,6 +34,8 @@ const validate = values => {
 
 const FormLogin = ({title}) => {
 
+    const [error, setError] = useState("");
+
 
     const formik = useFormik({
         initialValues: {
@@ -42,9 +44,9 @@ const FormLogin = ({title}) => {
         },
         validate,
         onSubmit: () => {
-            console.log("button");
             fire.auth().signInWithEmailAndPassword(formik.values.email, formik.values.password).then(() => {}).catch((error) => {
                 console.log(error);
+                setError("Invalid email or password");
             });
         },
     });
@@ -82,6 +84,7 @@ const FormLogin = ({title}) => {
                 {formik.touched.password && formik.errors.password ? (
                     <div style={style}>{formik.errors.password}</div>
                 ) : null}
+                {error && formik.values.password ? <div style={style}>{error}</div> : null}
                <Button btnType="btn btn-primary" text="Sign In"/>
             </form>
         </div>

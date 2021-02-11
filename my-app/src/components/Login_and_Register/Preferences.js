@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Header from "./Header";
 import fire, {db} from "../../firebase";
 import {useHistory} from "react-router-dom";
@@ -90,7 +90,6 @@ const Preferences = ({registerData, user, userData}) => {
         setPref([...items]);
     }
 
-    const [userName, setUserName] = useState("");
     let history = useHistory();
 
     const handleSubmit = (e) => {
@@ -101,8 +100,7 @@ const Preferences = ({registerData, user, userData}) => {
         newArr.forEach((el) => {
             arr.push(el.name);
         })
-        console.log(newArr);
-        console.log(arr);
+
 
         if (newArr.length !== 0) {
             if (user === null) {
@@ -113,7 +111,7 @@ const Preferences = ({registerData, user, userData}) => {
             }
             if (user) {
                 db.collection("users").doc(user.email).set({
-                    name: userData.name,
+                    // name: userData.name,
                     preferences: [...arr]
                 })
                     .then(function () {

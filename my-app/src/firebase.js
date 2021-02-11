@@ -14,13 +14,24 @@ const firebaseConfig = {
 };
 const fire = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-const googleProvider = new firebase.auth.GoogleAuthProvider()
+const auth = firebase.auth();
+
 export const signInWithGoogle = () => {
-    firebase.signInWithPopup(googleProvider).then((res) => {
+    const googleProvider = new firebase.auth.GoogleAuthProvider()
+    auth.signInWithPopup(googleProvider).then((res) => {
         console.log(res.user)
     }).catch((error) => {
         console.log(error.message)
     })
 }
+export const signInWithFacebook = () => {
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
+    auth.signInWithPopup(facebookProvider).then((res) => {
+        console.log(res.user)
+    }).catch((error) => {
+        console.log(error.message)
+    })
+}
+
 export {db};
 export default fire;

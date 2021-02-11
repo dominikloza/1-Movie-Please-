@@ -1,0 +1,23 @@
+{
+  "movieapp": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-1movieplaese-movieapp-02518-authRole",
+      "UnauthRoleArn": "arn:aws:iam::738933356897:role/amplify-1movieplaese-movieapp-02518-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::738933356897:role/amplify-1movieplaese-movieapp-02518-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-1movieplaese-movieapp-02518-deployment",
+      "UnauthRoleName": "amplify-1movieplaese-movieapp-02518-unauthRole",
+      "StackName": "amplify-1movieplaese-movieapp-02518",
+      "StackId": "arn:aws:cloudformation:eu-west-1:738933356897:stack/amplify-1movieplaese-movieapp-02518/3e473400-6bf7-11eb-88c3-02c7fabfdf91",
+      "AmplifyAppId": "d32clfkeqe7863"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d32clfkeqe7863",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}

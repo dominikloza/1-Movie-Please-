@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../Login_and_Register/Header";
 import Footer from "./Footer";
-import Button from "../Button";
 import {Link, useHistory} from "react-router-dom";
 import fire, {db} from "../../firebase";
 import {API_KEY, API_URL} from "../../APIconfing";
 import poster from '../../resources/poster.png'
-import userEvent from "@testing-library/user-event";
 
-const SearchFilm = ({logged, userData, movie, setMovie, setDarkMode}) => {
+const SearchFilm = ({logged, userData, user, movie, setMovie}) => {
 
 
         let styleCircle = {}
@@ -92,9 +90,7 @@ const SearchFilm = ({logged, userData, movie, setMovie, setDarkMode}) => {
                 .then(data => {
                     movieCat = data;
                     let tempArr = movieCat.genres.filter(el => userData.preferences.includes(el.name))
-                    console.log(tempArr)
                     category = Math.floor(Math.random() * tempArr.length);
-                    console.log(category)
                     catNum = tempArr[category].id;
 
                     return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=bbef4d3837dce662da7cd81c33cc86ea&language=pl-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${catNum}`, {
@@ -149,10 +145,9 @@ const SearchFilm = ({logged, userData, movie, setMovie, setDarkMode}) => {
         };
 
 
-
         return (
             <div className="main_page">
-                <Header style={avatarStyle} logged={logged} userData={userData}/>
+                <Header style={avatarStyle} logged={logged} user={user}/>
                 <h2 className="page_text search_film">Let's choose
                     Preferences of a Movie and Click on Button below</h2>
                 <div className="btn_box">
@@ -178,7 +173,7 @@ const SearchFilm = ({logged, userData, movie, setMovie, setDarkMode}) => {
                         </p>
                         <div className="rate_scale">
                         </div>
-                        <Link to="/fullFilmDescription"><button>Read More</button></Link>
+                        <Link to="/fullFilmDescription"><button>Read<br/>More</button></Link>
                     </div>
                 </div>
                 }
@@ -193,7 +188,7 @@ const SearchFilm = ({logged, userData, movie, setMovie, setDarkMode}) => {
                 </nav>
                 <div className="aside_nav" style={styleCircle}
                      onMouseLeave={aside === "clicked" ? undefined : () => setAside(false)}></div>
-                <Footer setDarkMode={setDarkMode}/>
+                <Footer/>
             </div>
         );
     }
